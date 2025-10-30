@@ -1,13 +1,9 @@
 from pydantic import UUID4, BaseModel, Field
 
 
-class TasksCreate(BaseModel):
-    uid_proj: UUID4 = Field(
-        description="UID проекта",
-        default=None
-    )
-    price: str = Field(
-        description="вознаграждение",
+class SubtaskCreate(BaseModel):
+    uid_task: UUID4 = Field(
+        description="UID задачи",
         default=None
     )
     title: str = Field(
@@ -20,15 +16,12 @@ class TasksCreate(BaseModel):
     )
 
 
-class TasksDB(BaseModel):
+class SubtaskDB(BaseModel):
     uid: UUID4 = Field(
+        description="UID подзадачи"
+    )
+    uid_task: UUID4 = Field(
         description="UID задачи"
-    )
-    uid_proj: UUID4 = Field(
-        description="UID проекта"
-    )
-    price: str = Field(
-        description="вознаграждение"
     )
     title: str = Field(
         description="оглавление"

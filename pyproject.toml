@@ -10,7 +10,11 @@ requires-python = ">=3.12"
 dependencies = [
     "fastapi (>=0.117.1,<0.118.0)",
     "uvicorn (>=0.37.0,<0.38.0)",
-    "pydantic-settings (>=2.11.0,<3.0.0)"
+    "pydantic-settings (>=2.11.0,<3.0.0)",
+    "alembic (>=1.17.0,<2.0.0)",
+    "aiosqlite (>=0.21.0,<0.22.0)",
+    "psycopg (>=3.2.10,<4.0.0)",
+    "psycopg-binary (>=3.2.10,<4.0.0)"
 ]
 
 
@@ -41,8 +45,8 @@ exclude = [
     ".venv",
     ".vscode",
     ".idea",
+    "migrations/versions"
 ]
 per-file-ignores = [
-#    "migrations/env.py:F401",
-#    "migrations/versions/*:W291",
+    "migrations/env.py:F401"
 ]

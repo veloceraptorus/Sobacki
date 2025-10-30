@@ -1,12 +1,9 @@
 from datetime import date
+
 from pydantic import UUID4, BaseModel, Field
 
 
-class Proj(BaseModel):
-    uid: UUID4 = Field(
-        description="UID проекта",
-        default=None
-    )
+class ProjCreate(BaseModel):
     title: str = Field(
         description="название",
         default=None
@@ -19,15 +16,15 @@ class Proj(BaseModel):
         description="дата начала",
         default=None
     )
-    UID_creator: UUID4 = Field(
+    uid_creator: UUID4 | None = Field(
         description="создатель",
         default=None
     )
-    UID_client: UUID4 | None = Field(
+    uid_client: UUID4 | None = Field(
         description="заказчик",
         default=None
     )
-    Initial_budget: float | None = Field(
+    initial_budget: float | None = Field(
         description="начальный бюджет",
         default=None
     )
@@ -38,4 +35,48 @@ class Proj(BaseModel):
     colour: str = Field(
         description="определительный цвет",
         default=None
+    )
+    status: str = Field(
+        description="статус готовости",
+        default=None
+    )
+    deadline: date = Field(
+        description="дата, когда проект должен быть готов",
+        default=None
+    )
+
+
+class ProjectDB(BaseModel):
+    uid: UUID4 = Field(
+        description="UID проекта"
+    )
+    title: str = Field(
+        description="название"
+    )
+    description: str = Field(
+        description="описание"
+    )
+    create_date: date = Field(
+        description="дата начала"
+    )
+    uid_creator: UUID4 | None = Field(
+        description="создатель"
+    )
+    uid_client: UUID4 | None = Field(
+        description="заказчик"
+    )
+    initial_budget: float | None = Field(
+        description="начальный бюджет"
+    )
+    result_budget: float | None = Field(
+        description="конечный бюджет"
+    )
+    colour: str = Field(
+        description="определительный цвет"
+    )
+    status: str = Field(
+        description="статус готовости"
+    )
+    deadline: date = Field(
+        description="дата, когда проект должен быть готов"
     )

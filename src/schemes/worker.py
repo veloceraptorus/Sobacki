@@ -1,11 +1,7 @@
 from pydantic import UUID4, BaseModel, Field
 
 
-class Worker(BaseModel):
-    uid: UUID4 = Field(
-        description="UID разработчика",
-        default=None
-    )
+class WorkerCreate(BaseModel):
     name: str = Field(
         description="ФИО",
         default=None
@@ -21,4 +17,29 @@ class Worker(BaseModel):
     role: str = Field(
         description="роль",
         default=None
+    )
+    email: str = Field(
+        description="почта",
+        dafault=None
+    )
+
+
+class WorkerDB(BaseModel):
+    uid: UUID4 = Field(
+        description="UID разработчика"
+    )
+    name: str = Field(
+        description="ФИО"
+    )
+    telephone_number: str = Field(
+        description="номер телефона"
+    )
+    colour: str = Field(
+        description="определительный цвет"
+    )
+    role: str = Field(
+        description="роль"
+    )
+    email: str = Field(
+        description="почта"
     )
