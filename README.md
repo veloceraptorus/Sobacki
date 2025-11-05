@@ -3,5 +3,8 @@ da
 
 ## Запуск PostgresSQL через DOCKER
 ```cmd
-docker run --name habr-pg -e POSTGRES_PASSWORD=master -d postgres
+make docker_start
+make start
+```
+http://127.0.0.1:8000/api/v1/docs#/
 ```

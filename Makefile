@@ -1,4 +1,6 @@
 
+all: start
+
 .PHONY: alembic_autogen
 alembic_autogen: 
 	poetry run alembic revision --autogenerate -m "Initial revision"
@@ -10,13 +12,11 @@ alembic_upgrade:
 .PHONY: docker_start
 docker_start:
 	bash start_db.sh
-	sleep 2
-	poetry run alembic upgrade head
 
 .PHONY: flake8
 flake8:
 	poetry run flake8
 
 .PHONY: start
-start:
+start: alembic_upgrade
 	poetry run uvicorn src.main:app --reload
