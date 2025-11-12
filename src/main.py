@@ -11,7 +11,6 @@ from src.routers.tasks import router as tasks_router
 from src.routers.worker import router as worker_router
 from src.routers.worker_task import router as worker_task_router
 
-# from src.routes.shit import router as kaka_router
 
 router = APIRouter(prefix=settings.BASE_ROUTE_PATH)
 
@@ -27,8 +26,6 @@ router.include_router(tasks_router, prefix='/task', tags=['Задачи'])
 router.include_router(subtask_router, prefix='/subtask', tags=['Подзадачи'])
 router.include_router(worker_task_router, prefix='/worker_task', tags=['Рабочие задач'])
 router.include_router(worker_router, prefix='/worker', tags=['Рабочие'])
-# router.include_router(auto_router, prefix='/car', tags=['Не говно'])
-# router.include_router(dogo_router, prefix='/dog', tags=['Сэбэки'])
 
 app.include_router(router)
 

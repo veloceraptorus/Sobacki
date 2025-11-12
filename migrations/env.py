@@ -12,7 +12,7 @@ from src.config import settings
 from src.db import Base
 # should add all models here
 from src.models.client import Client
-from src.models.permitions import Permission
+from src.models.permitions import Permition
 from src.models.project import Project
 from src.models.subtask import Subtask
 from src.models.task import Task

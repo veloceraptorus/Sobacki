@@ -3,7 +3,7 @@ from datetime import date
 
 from pydantic import UUID4
 from sqlalchemy import UUID, Date, Float, ForeignKey, String
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from src.db import Base
 
@@ -22,3 +22,5 @@ class Project(Base):
     colour: Mapped[str] = mapped_column(String, nullable=False)
     status: Mapped[str] = mapped_column(String, nullable=False)
     deadline: Mapped[date] = mapped_column(Date, nullable=False)
+    
+    client = relationship("Client", backref="project")

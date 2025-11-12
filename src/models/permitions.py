@@ -7,7 +7,7 @@ from sqlalchemy.orm import Mapped, mapped_column
 from src.db import Base
 
 
-class Permission(Base):
+class Permition(Base):
     __tablename__ = 'permissions'
 
     uid: Mapped[UUID4] = mapped_column(UUID, primary_key=True, default=uuid.uuid4)

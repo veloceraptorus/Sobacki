@@ -14,3 +14,4 @@ class Client(Base):
     name: Mapped[str] = mapped_column(String, nullable=False)
     telephone_number: Mapped[str] = mapped_column(String, nullable=False)
     email: Mapped[str] = mapped_column(String, nullable=False)
+

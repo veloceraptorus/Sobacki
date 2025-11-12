@@ -1,6 +1,7 @@
 from datetime import date
 
 from pydantic import UUID4, BaseModel, Field
+from src.schemes.client import ClientDB
 
 
 class ProjCreate(BaseModel):
@@ -79,4 +80,16 @@ class ProjectDB(BaseModel):
     )
     deadline: date = Field(
         description="дата, когда проект должен быть готов"
+    )
+    client: ClientDB | None = None
+
+
+class ProjectFilter(BaseModel):
+    limit: int | None = Field(
+        description="Limit",
+        default=10
+    )
+    offset: int | None = Field(
+        description="Offset",
+        default=0
     )

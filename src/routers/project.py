@@ -1,43 +1,51 @@
 from fastapi import APIRouter, Depends
-from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from pydantic import UUID4
 
 from src.db import get_session
-from src.models.project import Project
+from src.services.project import ProjectServise
 from src.schemes.project import ProjCreate, ProjectDB
 
 router = APIRouter()
 
+# async def getter(uid: UUID4 ,db_session: AsyncSession = Depends(get_session)):
+#     c = select(Client)
+#     c = c.where(Client.uid == uid)
+#     cc = await db_session.execute(c)
+#     ccc = cc.scalar_one_or_none()
+#     return ccc
+
+
+# async def getter(uid: UUID4 ,db_session: AsyncSession = Depends(get_session)):
+#     t = select(Task)
+#     t = t.where(Task.uid == uid)
+#     tt = await db_session.execute(t)
+#     ttt = tt.scalar_one_or_none()
+#     return ttt
+
+
+# Изучить пару репозиториев в гитхаб с пайтоном, на понимание кода (Отпишись)
+# Все ошибки Flake8 исправить
+# Создать класс ProjectOutput для выводных данных, а-то чёт не удобно уже
+#       с ProjectDB не очень хорошо работать
+# Расписать точно также по всем остальным методам и классам
 
 @router.get('/list')
-async def get_list(db_session: AsyncSession = Depends(get_session)) -> list[ProjectDB]:
-    query_result = await db_session.execute(select(Project))
-    return query_result.scalars().all()
+async def get_list(db_session: AsyncSession = Depends(get_session)):
+    return await ProjectServise.get_list(db_session)
 
 
 @router.get('/{uid}')
 async def get(uid: UUID4, db_session: AsyncSession = Depends(get_session)) -> ProjectDB:
-    return (await db_session.execute(select(Project).where(Project.uid == uid))).scalar_one_or_none()
+    return await ProjectServise.get(uid, db_session)
 
 
 @router.post('/create')
 async def create(body: ProjCreate, db_session: AsyncSession = Depends(get_session)) -> ProjectDB:
-    obj = Project(**body.model_dump(exclude_unset=True))
-    db_session.add(obj)
-    await db_session.commit()
-    await db_session.refresh(obj)
-    return obj
+    return await ProjectServise.create(body, db_session)
 
 
 @router.put('/update')
 async def update(body: ProjectDB, db_session: AsyncSession = Depends(get_session)):
-    query = await db_session.execute(select(Project).where(Project.uid == body.uid))
-    query = query.scalar()
-    if query:
-        for key, value in body.model_dump(exclude_unset=True).items():
-            setattr(query, key, value)
-        await db_session.commit()
-        await db_session.refresh(query)
-    return query
+    return await ProjectServise.create(body, db_session)
