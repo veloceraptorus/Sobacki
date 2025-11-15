@@ -28,7 +28,7 @@ class ClientServise:
         db_session.add(obj)
         await db_session.commit()
         await db_session.refresh(obj)
-        return obj  
+        return obj
 
     @staticmethod
     async def update(body: ClientDB, db_session: AsyncSession = Depends(get_session)):

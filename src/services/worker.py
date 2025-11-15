@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import Depends
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -8,7 +8,7 @@ from src.db import get_session
 from src.models.worker import Worker
 from src.schemes.worker import WorkerCreate, WorkerDB
 
-from src.db import get_session
+# from src.db import get_session
 
 
 class WorkerServise:
@@ -23,7 +23,7 @@ class WorkerServise:
         query_obj = await db_session.execute(query)
         query_obj = query_obj.scalar()
         return query_obj
-    
+
     @staticmethod
     async def create(body: WorkerCreate, db_session: AsyncSession = Depends(get_session)) -> WorkerDB:
         obj = Worker(**body.model_dump(exclude_unset=True))

@@ -5,7 +5,7 @@ from pydantic import UUID4
 
 from src.db import get_session
 from src.services.project import ProjectServise
-from src.schemes.project import ProjCreate, ProjectDB
+from src.schemes.project import ProjCreate, ProjectOutput
 
 router = APIRouter()
 
@@ -26,10 +26,8 @@ router = APIRouter()
 
 
 # Изучить пару репозиториев в гитхаб с пайтоном, на понимание кода (Отпишись)
-# Все ошибки Flake8 исправить
 # Создать класс ProjectOutput для выводных данных, а-то чёт не удобно уже
 #       с ProjectDB не очень хорошо работать
-# Расписать точно также по всем остальным методам и классам
 
 @router.get('/list')
 async def get_list(db_session: AsyncSession = Depends(get_session)):
@@ -37,15 +35,15 @@ async def get_list(db_session: AsyncSession = Depends(get_session)):
 
 
 @router.get('/{uid}')
-async def get(uid: UUID4, db_session: AsyncSession = Depends(get_session)) -> ProjectDB:
+async def get(uid: UUID4, db_session: AsyncSession = Depends(get_session)) -> ProjectOutput:
     return await ProjectServise.get(uid, db_session)
 
 
 @router.post('/create')
-async def create(body: ProjCreate, db_session: AsyncSession = Depends(get_session)) -> ProjectDB:
+async def create(body: ProjCreate, db_session: AsyncSession = Depends(get_session)) -> ProjectOutput:
     return await ProjectServise.create(body, db_session)
 
 
 @router.put('/update')
-async def update(body: ProjectDB, db_session: AsyncSession = Depends(get_session)):
+async def update(body: ProjectOutput, db_session: AsyncSession = Depends(get_session)):
     return await ProjectServise.create(body, db_session)

@@ -1,5 +1,4 @@
 from fastapi import APIRouter, Depends
-from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from pydantic import UUID4
@@ -24,7 +23,6 @@ async def get(uid: UUID4, db_session: AsyncSession = Depends(get_session)) -> Cl
 @router.post('/create')
 async def create(body: ClientCreate, db_session: AsyncSession = Depends(get_session)) -> ClientDB:
     return await ClientServise.create(body, db_session)
-
 
 
 @router.put('/update')

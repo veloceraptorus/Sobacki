@@ -22,9 +22,9 @@ async def get(uid: UUID4, db_session: AsyncSession = Depends(get_session)) -> Su
 
 @router.post('/create')
 async def create(body: SubtaskCreate, db_session: AsyncSession = Depends(get_session)) -> SubtaskDB:
-        return await SubtaskServise.create(body, db_session)
+    return await SubtaskServise.create(body, db_session)
 
 
 @router.put('/update')
 async def update(body: SubtaskDB, db_session: AsyncSession = Depends(get_session)):
-        return await SubtaskServise.update(body, db_session)
+    return await SubtaskServise.update(body, db_session)

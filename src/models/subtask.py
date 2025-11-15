@@ -14,5 +14,3 @@ class Subtask(Base):
     uid_task: Mapped[UUID4] = mapped_column(UUID, ForeignKey("tasks.uid"), nullable=False)
     title: Mapped[str] = mapped_column(String, nullable=True)
     description: Mapped[str] = mapped_column(String)
-
-    

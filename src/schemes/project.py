@@ -47,7 +47,7 @@ class ProjCreate(BaseModel):
     )
 
 
-class ProjectDB(BaseModel):
+class ProjectOutput(BaseModel):
     uid: UUID4 = Field(
         description="UID проекта"
     )

@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import Depends
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -8,7 +8,7 @@ from src.db import get_session
 from src.models.task import Task
 from src.schemes.tasks import TasksCreate, TasksDB
 
-from src.db import get_session
+# from src.db import get_session
 
 
 class TaskServise:
@@ -16,14 +16,14 @@ class TaskServise:
     async def get_list(db_session: AsyncSession = Depends(get_session)) -> list[TasksDB]:
         query_result = await db_session.execute(select(Task))
         return query_result.scalars().all()
-    
+
     @staticmethod
     async def get(uid: UUID4, db_session: AsyncSession = Depends(get_session)) -> TasksDB:
         query = select(Task).where(Task.uid == uid)
         query_obj = await db_session.execute(query)
         query_obj = query_obj.scalar()
         return query_obj
-        
+
     @staticmethod
     async def create(body: TasksCreate, db_session: AsyncSession = Depends(get_session)) -> TasksDB:
         obj = Task(**body.model_dump(exclude_unset=True))

@@ -1,11 +1,9 @@
 from fastapi import APIRouter, Depends
-from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from pydantic import UUID4
 
 from src.db import get_session
-from src.models.worker import Worker
 from src.schemes.worker import WorkerCreate, WorkerDB
 from src.services.worker import WorkerServise
 

@@ -22,5 +22,5 @@ class Project(Base):
     colour: Mapped[str] = mapped_column(String, nullable=False)
     status: Mapped[str] = mapped_column(String, nullable=False)
     deadline: Mapped[date] = mapped_column(Date, nullable=False)
-    
+
     client = relationship("Client", backref="project")

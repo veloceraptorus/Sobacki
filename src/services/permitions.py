@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import Depends
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -8,7 +8,7 @@ from src.db import get_session
 from src.models.permitions import Permition
 from src.schemes.permitions import PermissionsCreate, PermissionsDB
 
-from src.db import get_session
+# from src.db import get_session
 
 
 class PermitionServise:
@@ -16,14 +16,14 @@ class PermitionServise:
     async def get_list(db_session: AsyncSession = Depends(get_session)) -> list[PermissionsDB]:
         query_result = await db_session.execute(select(Permition))
         return query_result.scalars().all()
-    
+
     @staticmethod
     async def get(uid: UUID4, db_session: AsyncSession = Depends(get_session)) -> PermissionsDB:
         query = select(Permition).where(Permition.uid == uid)
         query_obj = await db_session.execute(query)
         query_obj = query_obj.scalar()
         return query_obj
-    
+
     @staticmethod
     async def create(body: PermissionsCreate, db_session: AsyncSession = Depends(get_session)) -> PermissionsDB:
         obj = Permition(**body.model_dump(exclude_unset=True))
