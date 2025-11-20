@@ -8,8 +8,6 @@ from src.db import get_session
 from src.models.permitions import Permition
 from src.schemes.permitions import PermissionsCreate, PermissionsDB
 
-# from src.db import get_session
-
 
 class PermitionServise:
     @staticmethod
