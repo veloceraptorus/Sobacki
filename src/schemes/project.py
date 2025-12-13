@@ -81,7 +81,7 @@ class ProjectOutput(BaseModel):
     deadline: date = Field(
         description="дата, когда проект должен быть готов"
     )
-    client: ClientDB | None = None
+    # client: ClientDB | None = None
 
 
 class ProjectFilter(BaseModel):

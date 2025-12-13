@@ -18,7 +18,7 @@ class WorkerServise:
         return query_result.scalars().all()
 
     @staticmethod
-    async def get(uid: UUID4, db_session: AsyncSession = Depends(get_session)) -> WorkerTaskDB:
+    async def get_by_uid(uid: UUID4, db_session: AsyncSession = Depends(get_session)) -> WorkerTaskDB:
         query = select(WorkerTask).where(WorkerTask.uid == uid)
         query_obj = await db_session.execute(query)
         query_obj = query_obj.scalar()

@@ -20,7 +20,10 @@ class ProjectServise:
     @staticmethod
     async def get(uid: UUID4, db_session: AsyncSession = Depends(get_session)) -> ProjectOutput:
         query = select(Project).where(Project.uid == uid)
-        query_obj = await db_session.execute(query)
+        try:
+            query_obj = await db_session.execute(query)
+        except:
+            raise "Я лох"
         query_obj = query_obj.scalar()
         return query_obj
 

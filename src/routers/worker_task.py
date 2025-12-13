@@ -16,8 +16,8 @@ async def get_list(db_session: AsyncSession = Depends(get_session)) -> list[Work
 
 
 @router.get('/{uid}')
-async def get(uid: UUID4, db_session: AsyncSession = Depends(get_session)) -> WorkerTaskDB:
-    return await WorkerServise.get(uid, db_session)
+async def get(uid: UUID4, db_session: AsyncSession = Depends(get_session)):
+    return await WorkerServise.get_by_uid(uid, db_session)
 
 
 @router.post('/create')

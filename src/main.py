@@ -10,7 +10,8 @@ from src.routers.subtask import router as subtask_router
 from src.routers.tasks import router as tasks_router
 from src.routers.worker import router as worker_router
 from src.routers.worker_task import router as worker_task_router
-
+# from src.DZ.user.router import router as user_router
+# from src.DZ.user_role.router import router as user_role_router
 
 router = APIRouter(prefix=settings.BASE_ROUTE_PATH)
 
@@ -26,6 +27,8 @@ router.include_router(tasks_router, prefix='/task', tags=['Задачи'])
 router.include_router(subtask_router, prefix='/subtask', tags=['Подзадачи'])
 router.include_router(worker_task_router, prefix='/worker_task', tags=['Рабочие задач'])
 router.include_router(worker_router, prefix='/worker', tags=['Рабочие'])
+# router.include_router(user_router, prefix='/user', tags=['Пользователь'])
+# router.include_router(user_role_router, prefix='/user_role', tags=['Роли пользователя'])
 
 app.include_router(router)
 
